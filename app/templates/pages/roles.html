@@ -1,0 +1,27 @@
+{% extends 'pages/baseRenderDataPage.html' %}
+
+{% block table %}
+<table class="table table-striped roles-table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Name
+            </th>
+            <th style="text-align: center">
+                Actions
+            </th>
+        </tr>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/pages/roles.js') }}"></script>
+{% endblock %}

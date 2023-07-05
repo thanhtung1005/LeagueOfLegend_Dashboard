@@ -1,0 +1,33 @@
+{% extends 'pages/baseRenderDataPage.html' %}
+
+{% block table %}
+<table class="table table-striped items-table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Tag
+            </th>
+            <th style="text-align: center">
+                Explain
+            </th>
+            <th style="text-align: center">
+                Actions
+            </th>
+        </tr>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/pages/items.js') }}"></script>
+{% endblock %}

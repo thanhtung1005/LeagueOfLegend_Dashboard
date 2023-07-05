@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 1.2rem;">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/feather/feather.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/perfect-scrollbar.min.css') }}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/libs/jquery.simplePagination.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/libs/font-awesome.min.css') }}">
+
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <!-- endinject -->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}" />
+    {% block css %}{% endblock %}
+    <title>{% block title %} {{ config["APP_NAME"] }} {% endblock %}</title>
+</head>
+<body>
+    <div id="loading-container" class="loading-container w-100 h-100 position-fixed">
+        <div class="d-flex align-items-center justify-content-center w-100 h-100">
+            <div class="loading-panel text-center text-white pt-4">
+                <div class="loading-icon loading-spinner m-auto"></div>
+                <div class="loading-text">Loading</div>
+            </div>
+        </div>
+    </div>
+    <div class="container-scroller">
+        {% include 'partitals/_navbar.html' %}
+        <div class="container-fluid page-body-wrapper">
+            {% include 'partitals/_sidebar.html' %}
+            {% include 'modals/showTableModal.html' %}
+            {% include 'modals/inputDataModal.html' %}
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+    {% include 'partitals/_footer.html' %}
+
+    <!-- plugins:js -->
+    <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/perfect-scrollbar.min.js') }}"></script>
+
+    <!-- inject:js -->
+    <script src="{{ url_for('static', filename='js/const.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/baseObject.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modals/inputDataModal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modals/showTableModal.js') }}"></script>
+    <!-- endinject -->
+
+    <!-- Custom js for this page-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/libs/jquery.simplePagination.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/libs/bootstrap-notify.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/libs/Chart.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/libs/moment.min.js') }}"></script>
+
+    <!-- End custom js for this page-->
+    {% block js %}{% endblock %}
+</body>
+</html>

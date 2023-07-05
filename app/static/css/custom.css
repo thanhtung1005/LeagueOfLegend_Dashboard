@@ -1,0 +1,64 @@
+:root {
+    --primary-color:#4B49AC;
+    --primary-hover-color:#3b3a88;
+}
+
+.input-corner {
+    border-radius: 15px;
+}
+
+.loading-container {
+    z-index: 10001;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+}
+.loading-panel {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 160px;
+    height: 170px;
+    border-radius: 15%
+}
+.loading-icon {
+    width: 70px;
+    height: 70px
+}
+.loading-spinner {
+    border: 8px solid transparent; /* Light grey */
+    border-top: 8px solid #f3f3f3; /* Blue */
+    border-bottom: 8px solid #f3f3f3; /* Blue */
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite
+}
+.loading-text {
+    font-size: 1.4em;
+    padding-top: 22px
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 15px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+  
+input[type=file]::file-selector-button:hover {
+    background: var(--primary-hover-color);
+}
+
+.file-block {
+    width: 100%;
+    color: #444;
+    padding: 5px;
+    background: #fff;
+    border-radius: 15px;
+    border: 1px solid #CED4DA;
+  }
+

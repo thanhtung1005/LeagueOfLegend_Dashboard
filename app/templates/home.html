@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="main-panel" id="home-main">
+    <div class="content-wrapper main-layout">
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="row">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold">League of Legend Database</h3>
+                        <h6 class="font-weight-normal mb-0"> A database for LOL game</span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card card-tale">
+                    <div class="card-body">
+                        <h4 class="mb-4">Number of champions</h4>
+                        <p class="fs-30 mb-2" id = "total-champions">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card card-dark-blue">
+                    <div class="card-body">
+                        <h4 class="mb-4">Number of items</h4>
+                        <p class="fs-30 mb-2" id = "total-items">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card card-light-danger">
+                    <div class="card-body">
+                        <h4 class="mb-4">Number of classes</h4>
+                        <p class="fs-30 mb-2" id = "total-classes">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 stretch-card transparent">
+                <div class="card card-light-blue">
+                    <div class="card-body">
+                        <h4 class="mb-4">Number of roles</h4>
+                        <p class="fs-30 mb-2" id = "total-roles">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="card" id="champions-infor-chart-card">
+                    <div class="card-body">
+                        <p class="card-title">Champions information chart</p>
+                        <canvas class="chart" id="champions-attack-chart"></canvas>
+                        <canvas class="chart" id="champions-magic-chart"></canvas>
+                        <canvas class="chart" id="champions-defense-chart"></canvas>
+                        <canvas class="chart" id="champions-difficulty-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="card" item="items-price-chart-card">
+                    <div class="card-body">
+                        <p class="card-title">Items price chart</p>
+                        <canvas id="items-buy-price-chart"></canvas>
+                        <canvas id="items-sell-price-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/statistics/drawChart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pages/home.js') }}"></script>
+{% endblock %}
