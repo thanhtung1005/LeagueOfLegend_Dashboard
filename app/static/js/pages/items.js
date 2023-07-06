@@ -53,7 +53,7 @@
                             },
                             resp.explain,
                         )
-                        utils.endBusy(utils.loadingPageBusyId);
+                        utils.endBusy();
                     }
                 ))
             })

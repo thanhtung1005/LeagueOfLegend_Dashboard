@@ -1,4 +1,4 @@
-from .base import createBaseBlueprint
+from .base import BaseBlueprint
 from ..models import Item
 from ..utils import (
     badRequest,
@@ -17,7 +17,7 @@ routes = {
     'update': '/updateItem',
 }
 
-itemsBlueprint = createBaseBlueprint(
+itemsBlueprint = BaseBlueprint(
     blueprintName='items',
     urlPrefix='/items',
     dataName='item',
@@ -26,7 +26,7 @@ itemsBlueprint = createBaseBlueprint(
     homePage='pages/items.html',
 )
 
-@itemsBlueprint.route('/getAllItemsPrice', methods=['GET', 'POST'])
+@itemsBlueprint.blueprint.route('/getAllItemsPrice', methods=['GET', 'POST'])
 def getAllItemsPrice():
     allItems = Item.query.all()
     data = {

@@ -2,37 +2,50 @@ class MultiImportModal {
     constructor() {
         this.$modal = $("#import-process-modal");
         this.$modalBody = this.$modal.find('.modal-body');
-        this.$modalFooter = this.$modal.find('.modal-footer');
 
-        this.API = null;
-
-        this.$formProcess = document.getElementById('upload-process-files');
-
-        this.$dataFile = this.$modalBody.find('.data-file');
-        this.$inforFile = this.$modalBody.find('.infor-file');
-        this.$ignoreFile = this.$modalBody.find('.ignore-file');
+        this.$formImport = document.getElementById('import-files');
 
         this.$btnClose = this.$modal.find('.btn-close');
-        this.$btnProcess = this.$modal.find('.btn-process');
-
-        this.$dataFile.on('change input', this.onChangeInput.bind(this));
-        this.$inforFile.on('change input', this.onChangeInput.bind(this));
-        this.$ignoreFile.on('change input', this.onChangeInput.bind(this));
-
-        this.$btnProcess.on('click', this.onClickProcessBtn.bind(this));
-
+        this.$btnImport = this.$modal.find('.btn-import');
     }
 
     show() {
         this.$modal.modal('show');
     }
+}
+
+
+class ImportChampionsDataModal extends MultiImportModal{
+    constructor() {
+        super();
+        this.$modalBody.append(
+            `
+            <div class="mb-5">
+                <label>Stats of champions</label>
+                <input class="file file-block champions-stats-file" name="champions-stats-file" type="file" accept=".xlsx,.csv">
+            </div>
+            <div class="mb-5">
+                <label>Class and roles of champions</label>
+                <input class="file file-block champions-classes-roles-file" name="champions-classes-roles-file" type="file" accept=".xlsx,.csv">
+            </div>
+            `
+        )
+        this.$championsStatsFile = this.$modalBody.find('.champions-stats-file');
+        this.$championsClassesRolesFile = this.$modalBody.find('.champions-classes-roles-file');
+
+        this.$championsStatsFile.on('change', this.onChangeInput.bind(this));
+        this.$championsClassesRolesFile.on('change', this.onChangeInput.bind(this));
+    }
 
     onChangeInput() {
-        const dataFileName = this.$dataFile.val();
-        const inforFileName = this.$inforFile.val();
+        const championsStatsFile = this.$championsStatsFile.val();
+        const championsClassesRolesFile = this.$championsClassesRolesFile.val();
 
-        if (!dataFileName || !inforFileName ) return this.$btnProcess.prop('disabled', true);
+        if (!championsStatsFile || !championsClassesRolesFile ) return this.$btnImport.prop('disabled', true);
 
-        this.$btnProcess.prop('disabled', false);
+        this.$btnImport.prop('disabled', false);
     }
+
+
+
 }

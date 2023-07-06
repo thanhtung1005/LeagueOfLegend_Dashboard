@@ -19,9 +19,9 @@ def createApp():
         rolesBlueprint
     )
     app.register_blueprint(homeBlueprint)
-    app.register_blueprint(championsBlueprint)
-    app.register_blueprint(itemsBlueprint)
-    app.register_blueprint(classesBlueprint)
-    app.register_blueprint(rolesBlueprint)
+    app.register_blueprint(championsBlueprint.blueprint)
+    app.register_blueprint(itemsBlueprint.blueprint)
+    app.register_blueprint(classesBlueprint.blueprint)
+    app.register_blueprint(rolesBlueprint.blueprint)
 
     return app

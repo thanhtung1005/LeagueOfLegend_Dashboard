@@ -5,6 +5,7 @@
             super({singular: 'champion', many: 'champions'}, ['blurb'], ModeImport.SingleFile);
             this.API.viewStats = `/${this.objectName}/championStats`;
             this.$inputModal = new InputChampionModal();
+            // this.$importModal = new ImportChampionsDataModal();
         }
 
         renderPage() {
@@ -36,7 +37,7 @@
                             },
                             resp.blurb,
                         )
-                        utils.endBusy(utils.loadingPageBusyId);
+                        utils.endBusy();
                     }
                 ))
             })

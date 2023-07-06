@@ -1,4 +1,4 @@
-from .base import createBaseBlueprint
+from .base import BaseBlueprint
 from ..models import Class
 from ..utils import (
     badRequest,
@@ -16,7 +16,7 @@ routes = {
     'getTotal': '/getTotalClasses'
 }
 
-classesBlueprint = createBaseBlueprint(
+classesBlueprint = BaseBlueprint(
     blueprintName='classes',
     urlPrefix='/classes',
     dataName='class',

@@ -1,4 +1,4 @@
-from .base import createBaseBlueprint
+from .base import BaseBlueprint
 from ..models import Champion
 from ..utils import (
     badRequest,
@@ -17,7 +17,7 @@ routes = {
     'update': '/updateChampion',
 }
 
-championsBlueprint = createBaseBlueprint(
+championsBlueprint = BaseBlueprint(
     blueprintName='champions',
     urlPrefix='/champions',
     dataName='champion',
@@ -26,7 +26,7 @@ championsBlueprint = createBaseBlueprint(
     homePage='pages/champions.html'
 )
 
-@championsBlueprint.route('getAllChampionsInfor', methods=['GET', 'POST'])
+@championsBlueprint.blueprint.route('getAllChampionsInfor', methods=['GET', 'POST'])
 def getAllChampionsInfor():
     allChampions = Champion.query.all()
     data = {

@@ -43,9 +43,9 @@
                     this.$totalRoles.text(resp);
                 }),
             ]
-            utils.startBusy(utils.loadingPageBusyId);
+            utils.startBusy();
             await Promise.all(requestsList);
-            utils.endBusy(utils.loadingPageBusyId);
+            utils.endBusy();
         }
 
         drawChampionsInforChart(championsData) {

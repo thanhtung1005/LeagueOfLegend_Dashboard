@@ -51,8 +51,10 @@ class BaseObject {
         this.$tbody = this.$table.find('tbody');
 
         if (this.modeImport == ModeImport.SingleFile) {
-            this.$formImport = $('#upload-data-files')[0];
+            this.$formImport = document.getElementById('upload-data-files');
             this.$inputImport = $('#data-import-input');
+        } else if (this.modeImport == ModeImport.MultiFiles) {
+            this.$importModal = new MultiImportModal();
         }
 
         this.$buttonImport = $('.btn-import');
@@ -66,13 +68,13 @@ class BaseObject {
             })
         ];
 
-        utils.startBusy(utils.loadingPageBusyId);
+        utils.startBusy();
         await Promise.all(requestList);
         this.renderPage();
         this.handleAcceptInputEvent();
         this.handleSearchEvent();
         this.handleExportEvent();
-        utils.endBusy(utils.loadingPageBusyId);
+        utils.endBusy();
     }
 
     renderPage() {
@@ -84,49 +86,75 @@ class BaseObject {
     onClickImportBtn() {
         if (this.modeImport == ModeImport.SingleFile) {
             this.$inputImport.trigger('click');
-            this.$inputImport.on('change', this.onChangeInputImport.bind(this));
+            this.$inputImport.on('change', this.acceptSingleFileImport.bind(this));
+        } else if (this.modeImport == ModeImport.MultiFiles) {
+            this.$importModal.show();
+            this.$importModal.$btnImport.on('click', this.acceptMultipleFilesImport.bind(this));
         }
     }
 
-    onChangeInputImport() {
-        utils.startBusy(utils.loadingPageBusyId)
+    acceptSingleFileImport() {
+        utils.startBusy()
         let formData = new FormData(this.$formImport);
+        console.log(formData);
         utils.sendRequestFile(
             this.API['import'],
             formData,
             async resp => {
-                console.log(resp.added);
-                if (resp.numAdded > 0) {
-                    utils.showSuccess(`${resp.numAdded} of ${this.objectName.many} successfully added`);
-                    this.objectsList.push(...resp.added);
-                } else {
-                    utils.showWarn(`None of ${this.objectName.many} was added`);
-                }
+                this.handleResponseImport(resp);
                 utils.endBusy();
-                this.$showModal.show(
-                    `${this.capitalizeFirstLetterObjectName.many} add results`,
-                    {
-                        header: [
-                            `${this.capitalizeFirstLetterObjectName.singular} name`,
-                            `${this.capitalizeFirstLetterObjectName.singular} add result`
-                        ],
-                        data: resp.results,
-                        options: {
-                            countResult: {
-                                success: resp.numAdded,
-                                error: resp.numFailed
-                            }
-                        }
-                    },
-                );
-                utils.endBusy(utils.loadingPageBusyId);
                 this.renderPage();
             },
             error => {
-                utils.endBusy(utils.loadingPageBusyId);
+                utils.endBusy();
                 utils.showWarn(error);
             }
         )
+    }
+
+    acceptMultipleFilesImport() {
+        utils.startBusy()
+        let formData = new FormData(this.$importModal.$formImport);
+        utils.sendRequestFile(
+            this.API['import'],
+            formData,
+            async resp => {
+                this.$importModal.$modal.modal('hide');
+                this.handleResponseImport(resp);
+                utils.endBusy();
+                this.renderPage();
+            },
+            error => {
+                utils.endBusy();
+                utils.showWarn(error);
+            }
+        )
+    }
+
+    handleResponseImport(resp) {
+        if (resp.numAdded > 0) {
+            utils.showSuccess(`${resp.numAdded} of ${this.objectName.many} successfully added`);
+            this.objectsList.push(...resp.added);
+        } else {
+            utils.showWarn(`None of ${this.objectName.many} was added`);
+        }
+        utils.endBusy();
+        this.$showModal.show(
+            `${this.capitalizeFirstLetterObjectName.many} add results`,
+            {
+                header: [
+                    `${this.capitalizeFirstLetterObjectName.singular} name`,
+                    `${this.capitalizeFirstLetterObjectName.singular} add result`
+                ],
+                data: resp.results,
+                options: {
+                    countResult: {
+                        success: resp.numAdded,
+                        error: resp.numFailed
+                    }
+                }
+            },
+        );
     }
 
     handleExportEvent() {

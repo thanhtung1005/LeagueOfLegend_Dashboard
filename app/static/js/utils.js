@@ -1,8 +1,6 @@
 class Utils {
     constructor() {
-        this.__progresses = [];
         this.$loadingContainer = $("#loading-container");
-        this.loadingPageBusyId = 10;
     }
 
     static average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
@@ -68,28 +66,12 @@ class Utils {
         this._notify("", message, 'dark', delay);
     }
 
-    startBusy(busyId = 0) {
-        if (busyId && !this.__progresses.includes(busyId)) {
-            this.__progresses.push(busyId);
-        }
-        if (busyId) {
-            this.$loadingContainer.fadeIn(500);
-        } else {
-            this.$loadingContainer.finish().fadeIn(500);
-        }
+    startBusy() {
+        this.$loadingContainer.fadeIn(500);
     }
 
-    endBusy(busyId = 0) {
-        if (busyId && this.__progresses.includes(busyId)) {
-            this.__progresses = this.__progresses.filter(x => x != busyId);
-        }
-        else if (busyId == -1) {
-            this.__progresses = [];
-        }
-        let numProgresses = this.__progresses.length;
-        if (numProgresses == 0) {
-            this.$loadingContainer.finish().hide()
-        }
+    endBusy() {
+        this.$loadingContainer.finish().hide()
     }
 
     sendRequest(url, data, successCallback, errorCallback) {
