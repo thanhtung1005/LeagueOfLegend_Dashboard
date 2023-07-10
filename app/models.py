@@ -1,23 +1,32 @@
+from sqlalchemy import (
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    String,
+    PrimaryKeyConstraint
+)
+
 from app import db
 
 
 class Champion(db.Model):
     __tablename__ = 'champions'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False, unique=True)
-    title = db.Column(db.String(50))
-    blurb = db.Column(db.String(500))
-    infoAttack = db.Column(db.Integer, nullable=False)
-    infoMagic = db.Column(db.Integer, nullable=False)
-    infoDefense = db.Column(db.Integer, nullable=False)
-    infoDifficulty = db.Column(db.Integer, nullable=False)
-    statHP = db.Column(db.Float, nullable=False)
-    statMP = db.Column(db.Float, nullable=False)
-    statMoveSpeed = db.Column(db.Integer, nullable=False)
-    statArmor = db.Column(db.Float, nullable=False)
-    statAttackRange = db.Column(db.Integer, nullable=False)
-    statAttackDamage = db.Column(db.Float, nullable=False)
-    statAttackSpeed = db.Column(db.Float, nullable=False)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(20), nullable=False, unique=True)
+    title = Column(String(50))
+    blurb = Column(String(500))
+    infoAttack = Column(Integer, nullable=False)
+    infoMagic = Column(Integer, nullable=False)
+    infoDefense = Column(Integer, nullable=False)
+    infoDifficulty = Column(Integer, nullable=False)
+    statHP = Column(Float, nullable=False)
+    statMP = Column(Float, nullable=False)
+    statMoveSpeed = Column(Integer, nullable=False)
+    statArmor = Column(Float, nullable=False)
+    statAttackRange = Column(Integer, nullable=False)
+    statAttackDamage = Column(Float, nullable=False)
+    statAttackSpeed = Column(Float, nullable=False)
 
     def __repr__(self):
         return '<Champion %r>' % self.name
@@ -44,8 +53,8 @@ class Champion(db.Model):
 
 class Class(db.Model):
     __tablename__ = 'classes'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False, unique=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(10), nullable=False, unique=True)
 
     def toDict(self):
         return {'id': self.id, 'name': self.name}
@@ -53,38 +62,51 @@ class Class(db.Model):
 
 class Role(db.Model):
     __tablename__ = 'roles'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False, unique=True)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(10), nullable=False, unique=True)
 
     def toDict(self):
         return {'id': self.id, 'name': self.name}
 
 
-class ChampionClassRole(db.Model):
-    __tablename__ = 'champion_class_role'
-    id = db.Column(db.Integer, primary_key=True)
-    championName = db.Column(db.String(20), db.ForeignKey('champions.name', ondelete='CASCADE'), nullable=False)
-    className = db.Column(db.String(20), db.ForeignKey('classes.name', ondelete='CASCADE'), nullable=False)
-    roleName = db.Column(db.String(20), db.ForeignKey('roles.name', ondelete='CASCADE'), nullable=False)
+class ChampionClass(db.Model):
+    __tablename__ = 'champion_class'
+    __table_args__ = (
+        PrimaryKeyConstraint('championId', 'classId'),
+    )
+    championId = Column(Integer, ForeignKey('champions.id', ondelete='CASCADE'), nullable=False)
+    classId = Column(Integer, ForeignKey('classes.id', ondelete='CASCADE'), nullable=True)
 
     def toDict(self):
         return {
-            'id': self.id,
-            'championName': self.championName,
-            'className': self.className,
-            'roleName': self.roleName
+            'championId': self.championId,
+            'classId': self.classId,
+        }
+
+class ChampionRole(db.Model):
+    __tablename__ = 'champion_role'
+    __table_args__ = (
+        PrimaryKeyConstraint('championId', 'roleId'),
+    )
+    championId = Column(Integer, ForeignKey('champions.id', ondelete='CASCADE'), nullable=False)
+    roleId = Column(Integer, ForeignKey('roles.id', ondelete='CASCADE'), nullable=True)
+
+    def toDict(self):
+        return {
+            'championId': self.championId,
+            'roleId': self.roleId,
         }
 
 
 class Item(db.Model):
     __tablename__ = 'items'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
-    name = db.Column(db.String(50), nullable=False)
-    explain = db.Column(db.String(200))
-    buyPrice = db.Column(db.Integer, nullable=False)
-    sellPrice = db.Column(db.Integer, nullable=False)
-    tag = db.Column(db.String(30))
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False, unique=True)
+    name = Column(String(50), nullable=False)
+    explain = Column(String(200))
+    buyPrice = Column(Integer, nullable=False)
+    sellPrice = Column(Integer, nullable=False)
+    tag = Column(String(30))
 
     def __repr__(self):
         return '<Item %r>' % self.name

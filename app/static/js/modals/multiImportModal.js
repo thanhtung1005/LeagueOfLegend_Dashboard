@@ -12,6 +12,10 @@ class MultiImportModal {
     show() {
         this.$modal.modal('show');
     }
+
+    hide() {
+        this.$modal.modal('hide');
+    }
 }
 
 
@@ -22,11 +26,11 @@ class ImportChampionsDataModal extends MultiImportModal{
             `
             <div class="mb-5">
                 <label>Stats of champions</label>
-                <input class="file file-block champions-stats-file" name="champions-stats-file" type="file" accept=".xlsx,.csv">
+                <input class="file file-block champions-stats-file" name="championsStatsFile" type="file" accept=".xlsx,.csv">
             </div>
             <div class="mb-5">
                 <label>Class and roles of champions</label>
-                <input class="file file-block champions-classes-roles-file" name="champions-classes-roles-file" type="file" accept=".xlsx,.csv">
+                <input class="file file-block champions-classes-roles-file" name="championsClassesRolesFile" type="file" accept=".xlsx,.csv">
             </div>
             `
         )
@@ -37,13 +41,17 @@ class ImportChampionsDataModal extends MultiImportModal{
         this.$championsClassesRolesFile.on('change', this.onChangeInput.bind(this));
     }
 
+    clearForm() {
+        this.$championsStatsFile.val('');
+        this.$championsClassesRolesFile.val('');
+    }
+
     onChangeInput() {
         const championsStatsFile = this.$championsStatsFile.val();
         const championsClassesRolesFile = this.$championsClassesRolesFile.val();
 
-        if (!championsStatsFile || !championsClassesRolesFile ) return this.$btnImport.prop('disabled', true);
-
-        this.$btnImport.prop('disabled', false);
+        if (championsStatsFile || championsClassesRolesFile ) this.$btnImport.prop('disabled', false);
+        else this.$btnImport.prop('disabled', true);
     }
 
 

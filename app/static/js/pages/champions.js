@@ -5,12 +5,10 @@
             super({singular: 'champion', many: 'champions'}, ['blurb'], ModeImport.SingleFile);
             this.API.viewStats = `/${this.objectName}/championStats`;
             this.$inputModal = new InputChampionModal();
-            // this.$importModal = new ImportChampionsDataModal();
         }
 
         renderPage() {
             super.renderPage()
-            this.renderUpdateObject();
             this.renderViewChampionStats()
         }
 
@@ -48,18 +46,19 @@
                 `
                 <tr>
                     <td>${numOrder}</td>
-                    <td style="text-align: center">${data.name}</td>
-                    <td style="text-align: center">${data.infoAttack}</td>
-                    <td style="text-align: center">${data.infoMagic}</td>
-                    <td style="text-align: center">${data.infoDefense}</td>
-                    <td style="text-align: center">${data.infoDifficulty}</td>
+                    <td>${data.name}</td>
+                    <td>${data.classes}</td>
+                    <td>${data.roles}</td>
                     <td style="text-align: center">
-                        <span class="view-champion-stats btn-link" data-id="${data.id}" data-name="${data.name}">View</span>
+                        <span class="view-champion-infor btn-link" data-id="${data.id}">View</span>
                     </td>
                     <td style="text-align: center">
-                        <span class="update-champion btn-link" data-id="${data.id}" data-name="${data.name}">Update</span>
+                        <span class="view-champion-stats btn-link" data-id="${data.id}">View</span>
+                    </td>
+                    <td style="text-align: center">
+                        <span class="update-champion btn-link" data-id="${data.id}">Update</span>
                         </br>
-                        <span class="delete-champion btn-link" data-id="${data.id}" data-name="${data.name}">Delete</span>
+                        <span class="delete-champion btn-link" data-id="${data.id}">Delete</span>
                     </td>
                 </tr>
                 `

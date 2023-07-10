@@ -48,7 +48,7 @@ input[type=file]::file-selector-button {
     cursor: pointer;
     transition: background .2s ease-in-out;
 }
-  
+
 input[type=file]::file-selector-button:hover {
     background: var(--primary-hover-color);
 }
@@ -61,4 +61,3 @@ input[type=file]::file-selector-button:hover {
     border-radius: 15px;
     border: 1px solid #CED4DA;
   }
-

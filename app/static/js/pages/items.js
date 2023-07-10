@@ -10,7 +10,6 @@
 
         renderPage() {
             super.renderPage()
-            this.renderUpdateObject();
             this.renderViewItemExplain()
         }
 

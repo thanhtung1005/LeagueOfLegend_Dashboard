@@ -102,6 +102,8 @@ class InputChampionModal extends InputDataModal{
             'infoDifficulty': this.$form.find('.champion-info-difficulty'),
             'title': this.$form.find('.champion-title'),
             'blurb': this.$form.find('.champion-blurb'),
+            // 'classes': this.$form.find('.champion-classes'),
+            // 'roles': this.$form.find('.champion-roles'),
         };
     }
 }

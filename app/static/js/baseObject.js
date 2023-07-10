@@ -17,6 +17,7 @@ class BaseObject {
         this.API = {
             add: `add${this.capitalizeFirstLetterObjectName.singular}`,
             delete: `delete${this.capitalizeFirstLetterObjectName.singular}`,
+            deleteAll: `deleteAll${this.capitalizeFirstLetterObjectName.many}`,
             getAll: `getAll${this.capitalizeFirstLetterObjectName.many}`,
             getOne: `get${this.capitalizeFirstLetterObjectName.singular}`,
             import: `import${this.capitalizeFirstLetterObjectName.many}`,
@@ -50,15 +51,19 @@ class BaseObject {
         this.$table = $(`.${this.objectName.many}-table`);
         this.$tbody = this.$table.find('tbody');
 
+        this.$buttonImport = $('.btn-import');
+        this.$buttonImport.on('click', this.onClickImportBtn.bind(this));
+
         if (this.modeImport == ModeImport.SingleFile) {
             this.$formImport = document.getElementById('upload-data-files');
             this.$inputImport = $('#data-import-input');
+            this.$inputImport.on('change', this.acceptSingleFileImport.bind(this));
         } else if (this.modeImport == ModeImport.MultiFiles) {
             this.$importModal = new MultiImportModal();
+            this.$importModal.$btnImport.on('click', this.acceptMultipleFilesImport.bind(this));
         }
 
-        this.$buttonImport = $('.btn-import');
-        this.$buttonImport.on('click', this.onClickImportBtn.bind(this));
+        this.$buttonDeleteAll = $('.btn-delete-all');
     }
 
     async init() {
@@ -74,29 +79,28 @@ class BaseObject {
         this.handleAcceptInputEvent();
         this.handleSearchEvent();
         this.handleExportEvent();
+        this.handleDeleteAllEvent();
         utils.endBusy();
     }
 
     renderPage() {
         this.renderObjectsList(this.objectsList);
         this.renderDeleteObject();
+        this.renderUpdateObject();
         this.renderAddObject();
     }
 
     onClickImportBtn() {
         if (this.modeImport == ModeImport.SingleFile) {
             this.$inputImport.trigger('click');
-            this.$inputImport.on('change', this.acceptSingleFileImport.bind(this));
         } else if (this.modeImport == ModeImport.MultiFiles) {
             this.$importModal.show();
-            this.$importModal.$btnImport.on('click', this.acceptMultipleFilesImport.bind(this));
         }
     }
 
     acceptSingleFileImport() {
         utils.startBusy()
         let formData = new FormData(this.$formImport);
-        console.log(formData);
         utils.sendRequestFile(
             this.API['import'],
             formData,
@@ -113,13 +117,13 @@ class BaseObject {
     }
 
     acceptMultipleFilesImport() {
-        utils.startBusy()
+        utils.startBusy();
+        this.$importModal.hide();
         let formData = new FormData(this.$importModal.$formImport);
         utils.sendRequestFile(
             this.API['import'],
             formData,
             async resp => {
-                this.$importModal.$modal.modal('hide');
                 this.handleResponseImport(resp);
                 utils.endBusy();
                 this.renderPage();
@@ -134,7 +138,7 @@ class BaseObject {
     handleResponseImport(resp) {
         if (resp.numAdded > 0) {
             utils.showSuccess(`${resp.numAdded} of ${this.objectName.many} successfully added`);
-            this.objectsList.push(...resp.added);
+            this.objectsList = resp.objectsList;
         } else {
             utils.showWarn(`None of ${this.objectName.many} was added`);
         }
@@ -159,6 +163,20 @@ class BaseObject {
 
     handleExportEvent() {
         this.$btnExport.on('click', () => console.log('test export'))
+    }
+    handleDeleteAllEvent() {
+        this.$buttonDeleteAll.on('click', () => {
+            utils.startBusy();
+            utils.sendRequest(
+                this.API['deleteAll'], null,
+                async resp => {
+                    utils.showSuccess(resp)
+                    this.objectsList = [];
+                    utils.endBusy();
+                    this.renderPage();
+                }
+            );
+        })
     }
 
     handleSearchEvent() {

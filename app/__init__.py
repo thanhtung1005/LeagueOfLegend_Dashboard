@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_compress import Compress
 from .config import config
 
+
 db = SQLAlchemy()
 compress = Compress()
 

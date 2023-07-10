@@ -1,5 +1,9 @@
 from .base import BaseBlueprint
-from ..models import Class
+from .routes import Route
+from ..models import (
+    ChampionClass,
+    Class
+)
 from ..utils import (
     badRequest,
     response
@@ -7,20 +11,25 @@ from ..utils import (
 
 
 routes = {
-    'add': '/addClass',
-    'delete': '/deleteClass',
-    'getAll': '/getAllClasses',
-    'home': '/',
-    'import': '/importClasses',
-    'search': '/searchClass',
-    'getTotal': '/getTotalClasses'
+    Route.Add: '/addClass',
+    Route.Delete: '/deleteClass',
+    Route.DeleteAll: '/deleteAllClasses',
+    Route.GetAll: '/getAllClasses',
+    Route.Get: 'getClass',
+    Route.Home: '/',
+    Route.Import: '/importClasses',
+    Route.Search: '/searchClass',
+    Route.GetTotal: '/getTotalClasses',
+    Route.Update: '/updateClass'
 }
 
 classesBlueprint = BaseBlueprint(
     blueprintName='classes',
     urlPrefix='/classes',
     dataName='class',
-    dbModel=Class,
     routes=routes,
-    homePage='pages/Classes.html'
+    homePage='pages/classes.html',
+    key='name'
 )
+classesBlueprint.createRoutes(Class)
+classesBlueprint.createDeleteAllRoute([ChampionClass, Class])

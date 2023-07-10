@@ -2,6 +2,7 @@ import json
 import logging
 
 import flask as fl
+import pandas as pd
 
 
 def jsonify(data:dict):
@@ -27,3 +28,23 @@ def response(data=None, status=True):
 
 def log_err(message=""):
     logging.error(f"{fl.request.path}: {message}")
+
+def readExcelOrCSVFile(dataFile):
+    if dataFile.filename.endswith('.xlsx'):
+        result = pd.read_excel(dataFile)
+    elif dataFile.filename.endswith('.csv'):
+        result = pd.read_csv(dataFile)
+    else:
+        result = None
+    if result is not None:
+        result.fillna('', inplace=True)
+        result.drop_duplicates(inplace=True)
+    return result
+
+def evalData(data) -> list:
+    if type(data) != list:
+        try:
+            data = eval(data)
+        except:
+            data = []
+    return data

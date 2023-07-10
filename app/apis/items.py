@@ -1,4 +1,5 @@
 from .base import BaseBlueprint
+from .routes import Route
 from ..models import Item
 from ..utils import (
     badRequest,
@@ -7,24 +8,27 @@ from ..utils import (
 
 
 routes = {
-    'add': '/addItem',
-    'delete': '/deleteItem',
-    'getAll': '/getAllItems',
-    'getOne': '/getItem',
-    'home': '/',
-    'import': '/importItems',
-    'search': '/searchItem',
-    'update': '/updateItem',
+    Route.Add: '/addItem',
+    Route.Delete: '/deleteItem',
+    Route.DeleteAll: '/deleteAllItems',
+    Route.GetAll: '/getAllItems',
+    Route.Get: '/getItem',
+    Route.Home: '/',
+    Route.Import: '/importItems',
+    Route.Search: '/searchItem',
+    Route.Update: '/updateItem',
 }
 
 itemsBlueprint = BaseBlueprint(
     blueprintName='items',
     urlPrefix='/items',
     dataName='item',
-    dbModel=Item,
     routes=routes,
     homePage='pages/items.html',
+    key='name'
 )
+itemsBlueprint.createRoutes(Item)
+itemsBlueprint.createDeleteAllRoute([Item])
 
 @itemsBlueprint.blueprint.route('/getAllItemsPrice', methods=['GET', 'POST'])
 def getAllItemsPrice():

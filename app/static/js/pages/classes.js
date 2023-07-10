@@ -13,6 +13,8 @@
                     <td>${numOrder}</td>
                     <td>${data.name}</td>
                     <td style="text-align: center">
+                        <span class="update-class btn-link" data-id="${data.id}" data-name="${data.name}">Update</span>
+                        </br>
                         <span class="delete-class btn-link" data-id="${data.id}" data-name="${data.name}">Delete</span>
                     </td>
                 </tr>
