@@ -9,9 +9,6 @@
                 getTotalRoles: 'roles/getTotalRoles',
                 getTotalClasses: 'classes/getTotalClasses',
             };
-            this.STATISTICS_API = {
-
-            }
             this.$totalChampions = $('#total-champions');
             this.$totalItems = $('#total-items');
             this.$totalClasses = $('#total-classes');

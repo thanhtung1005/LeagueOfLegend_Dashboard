@@ -37,9 +37,7 @@
         {% include 'partitals/_navbar.html' %}
         <div class="container-fluid page-body-wrapper">
             {% include 'partitals/_sidebar.html' %}
-            {% include 'modals/showTableModal.html' %}
-            {% include 'modals/inputDataModal.html' %}
-            {% include 'modals/multiImportModal.html' %}
+            {% block modal %}{% endblock %}
             {% block body %}{% endblock %}
         </div>
     </div>
@@ -49,6 +47,7 @@
     <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/libs/popper.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/libs/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/libs/vendor.bundle.base.js') }}"></script>
     <script src="{{ url_for('static', filename='js/libs/perfect-scrollbar.min.js') }}"></script>
 
     <!-- inject:js -->

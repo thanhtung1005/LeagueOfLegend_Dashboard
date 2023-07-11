@@ -1,5 +1,9 @@
 {% extends 'pages/baseRenderDataPage.html' %}
 
+{% block input_modal %}
+    {% include 'modals/championsInputModal.html' %}
+{% endblock %}
+
 {% block table %}
     <table class="table table-striped champions-table">
         <thead>

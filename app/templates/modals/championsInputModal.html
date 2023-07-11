@@ -1,0 +1,92 @@
+{% extends 'modals/inputDataModal.html' %}
+
+{% block modal_body %}
+<div class="form-group">
+    <label>Bulrb</label>
+    <input type="text" class="form-control champion-blurb">
+</div>
+<div class="row data-row">
+    <div class="col-md-3 grid-margin">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control champion-name">
+            <label>Title</label>
+            <input type="text" class="form-control champion-title">
+            <label>Classes</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">
+                            <input type="checkbox" class="form-check-input">Class 1
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <input type="checkbox" class="form-check-input">Class 2
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <input type="checkbox" class="form-check-input">Class 3
+                        </a>
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" disabled>
+              </div>
+            <label>Roles</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">
+                            <input type="checkbox" class="form-check-input">Role 1
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <input type="checkbox" class="form-check-input">Role 2
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <input type="checkbox" class="form-check-input">Role 3
+                        </a>
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 grid-margin">
+        <div class="form-group">
+            <label >Attack</label>
+            <input type="number" step="1" min="0" max="10" class="form-control champion-info-attack">
+            <label >Magic</label>
+            <input type="number" step="1" min="0" max="10" class="form-control champion-info-magic">
+            <label >Defense</label>
+            <input type="number" step="1" min="0" max="10" class="form-control champion-info-defense">
+            <label >Difficulty</label>
+            <input type="number" step="1" min="0" max="10" class="form-control champion-info-difficulty">
+        </div>
+    </div>
+    <div class="col-md-3 grid-margin">
+        <div class="form-group">
+            <label>HP</label>
+            <input type="number" class="form-control champion-hp">
+            <label>MP</label>
+            <input type="number" class="form-control champion-mp">
+            <label>Move speed</label>
+            <input type="number" class="form-control champion-move-speed">
+            <label >Armor</label>
+            <input type="number" class="form-control champion-armor">
+        </div>
+    </div>
+    <div class="col-md-3 grid-margin">
+        <div class="form-group">
+            <label>Attack range</label>
+            <input type="number" class="form-control champion-attack-range">
+            <label>Attack damage</label>
+            <input type="number" class="form-control champion-attack-damage">
+            <label>Attack speed</label>
+            <input type="number" class="form-control champion-attack-speed">
+        </div>
+    </div>
+</div>
+{% endblock %}

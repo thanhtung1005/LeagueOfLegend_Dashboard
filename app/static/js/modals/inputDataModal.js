@@ -41,52 +41,6 @@ class InputChampionModal extends InputDataModal{
     constructor() {
         super();
         this.$dialog.addClass('modal-xl')
-        this.$body.append(
-            `
-            <div class="row data-row">
-                <div class="col-md-4 grid-margin">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control champion-name">
-                        <label >Attack</label>
-                        <input type="number" step="1" min="0" max="10" class="form-control champion-info-attack">
-                        <label >Magic</label>
-                        <input type="number" step="1" min="0" max="10" class="form-control champion-info-magic">
-                        <label >Defense</label>
-                        <input type="number" step="1" min="0" max="10" class="form-control champion-info-defense">
-                        <label >Difficulty</label>
-                        <input type="number" step="1" min="0" max="10" class="form-control champion-info-difficulty">
-                    </div>
-                </div>
-                <div class="col-md-4 grid-margin">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" class="form-control champion-title">
-                        <label>HP</label>
-                        <input type="number" class="form-control champion-hp">
-                        <label>MP</label>
-                        <input type="number" class="form-control champion-mp">
-                        <label>Move speed</label>
-                        <input type="number" class="form-control champion-move-speed">
-                        <label >Armor</label>
-                        <input type="number" class="form-control champion-armor">
-                    </div>
-                </div>
-                <div class="col-md-4 grid-margin">
-                    <div class="form-group">
-                        <label>Bulrb</label>
-                        <input type="text" class="form-control champion-blurb">
-                        <label >Attack range</label>
-                        <input type="number" class="form-control champion-attack-range">
-                        <label >Attack damage</label>
-                        <input type="number" class="form-control champion-attack-damage">
-                        <label >Attack speed</label>
-                        <input type="number" class="form-control champion-attack-speed">
-                    </div>
-                </div>
-            </div>
-            `
-        )
         this.$inputData = {
             'name': this.$form.find('.champion-name'),
             'statHP': this.$form.find('.champion-hp'),
