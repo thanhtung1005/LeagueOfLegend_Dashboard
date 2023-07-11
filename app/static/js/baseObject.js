@@ -270,6 +270,7 @@ class BaseObject {
             } else {
                 throw new Error(`Invalid mode input ${this.modeInput}`);
             }
+            this.$inputModal.onChangeInput(true);
         })
     }
 

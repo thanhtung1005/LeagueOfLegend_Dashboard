@@ -180,6 +180,7 @@ class BaseBlueprint():
         if not updatedStatus:
             updatedStatus['message'] = 'Nothing to update'
         else:
+            updatedStatus['id'] = objectToUpdate.id
             updatedStatus['message'] = f"Successfully update {', '.join(updatedStatus.keys())} of {getattr(objectToUpdate, self.key)}."
         try:
             db.session.commit()
