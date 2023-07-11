@@ -50,15 +50,24 @@
                     <td>${data.classes}</td>
                     <td>${data.roles}</td>
                     <td style="text-align: center">
-                        <span class="view-champion-infor btn-link" data-id="${data.id}">View</span>
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon view-champion-infor" data-id="${data.id}">
+                            <i class="ti-eye text-info"></i>
+                        </button>
                     </td>
                     <td style="text-align: center">
-                        <span class="view-champion-stats btn-link" data-id="${data.id}">View</span>
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon view-champion-stats" data-id="${data.id}">
+                            <i class="ti-eye text-info"></i>
+                        </button>
                     </td>
                     <td style="text-align: center">
-                        <span class="update-champion btn-link" data-id="${data.id}">Update</span>
-                        </br>
-                        <span class="delete-champion btn-link" data-id="${data.id}">Delete</span>
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon update-champion" data-id="${data.id}">
+                            <i class="ti-pencil text-primary"></i>
+                        </button>
+                    </td>
+                    <td style="text-align: center">
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon delete-champion" data-id="${data.id}">
+                            <i class="ti-close text-danger"></i>
+                        </button>
                     </td>
                 </tr>
                 `

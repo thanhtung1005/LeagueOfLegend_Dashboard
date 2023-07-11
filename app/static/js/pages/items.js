@@ -21,12 +21,19 @@
                     <td>${data.name}</td>
                     <td>${data.tag}</td>
                     <td style="text-align: center">
-                        <span class="view-item-explain btn-link" data-id="${data.id}" data-name="${data.name}">View</span>
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon view-item-explain" data-id="${data.id}">
+                            <i class="ti-eye text-info"></i>
+                        </button>
                     </td>
                     <td style="text-align: center">
-                        <span class="update-item btn-link" data-id="${data.id}" data-name="${data.name}">Update</span>
-                        </br>
-                        <span class="delete-item btn-link" data-id="${data.id}" data-name="${data.name}">Delete</span>
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon update-item" data-id="${data.id}">
+                            <i class="ti-pencil text-primary"></i>
+                        </button>
+                    </td>
+                    <td style="text-align: center">
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon delete-item" data-id="${data.id}">
+                            <i class="ti-close text-danger"></i>
+                        </button>
                     </td>
                 </tr>
                 `
