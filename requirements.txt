@@ -1,0 +1,7 @@
+pandas
+pymysql
+sqlalchemy
+python-dotenv
+flask
+flask_sqlalchemy
+flask_compress

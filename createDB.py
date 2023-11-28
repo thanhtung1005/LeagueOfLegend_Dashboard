@@ -1,12 +1,12 @@
 import pymysql
 
 from app import db, createApp
-from app.models import Champion
 
 
 connection = pymysql.connect(
     host='localhost',
     user='root',
+    # Change your password here
     passwd='your_password'
 )
 
