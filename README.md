@@ -24,7 +24,7 @@ git clone https://github.com/thanhtung1005/LeagueOfLegend_Dashboard
   pip install -r requirements.txt
   ```
 
-* You need to install MySQL to run this app (download [here](https://dev.mysql.com/doc/workbench/en/wb-installing-windows.html)). After doawnload you need to run `MySQL Workbench` and create a server with `username` and `password` to save database. Finally, change your `username` and `password` in file `.env` and `createDB.py`.
+* You need to install MySQL to run this app (download [here](https://dev.mysql.com/doc/workbench/en/wb-installing-windows.html)). After doawnload you need to run `MySQL Workbench` and create a server with `servername`, `username` and `password` to save database. Finally, change your `servername` (DB_HOST),  `username` (DB_USER) and `password` (DB_PASSWORD) in file `.env` and `createDB.py`.
 
 ## **Run app**
 
